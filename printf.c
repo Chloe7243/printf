@@ -14,6 +14,7 @@ int _printf(const char *format, ...)
 	int i, j, size, len, outlen = 0;
 	char *s;
 
+
 	va_start(args, format);
 	len = strlen(format);
 
