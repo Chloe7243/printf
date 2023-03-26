@@ -12,7 +12,7 @@
 int get_printf(char c, va_list args)
 {
 	int rval = 0;
-	char *s;
+	char *s = "(nil)";
 
 	switch (c)
 	{
@@ -20,7 +20,9 @@ int get_printf(char c, va_list args)
 			rval += _putchar(va_arg(args, int));
 			break;
 		case 's':
-			s = va_arg(args, char*);
+			if (va_arg(args, char*))
+				s = va_arg(args, char*);
+
 			while (*s != '\0')
 			{
 				rval += _putchar(*s);
