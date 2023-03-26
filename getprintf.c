@@ -22,10 +22,10 @@ int get_printf(char c, va_list args)
 			break;
 		case 's':
 			s = va_arg(args, char*);
-			if (!s)
-				s = "(nil)";
+			if (s == NULL)
+				s = "(null)";
 
-			while (*s != '\0')
+			while (*s)
 			{
 				rval += _putchar(*s);
 				s++;
@@ -35,7 +35,9 @@ int get_printf(char c, va_list args)
 			rval += _putchar('%');
 			break;
 		default:
+			rval += _putchar('%');
 			rval += _putchar(c);
+			break;
 	}
 
 	return (rval);

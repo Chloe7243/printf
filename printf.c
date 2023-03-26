@@ -12,12 +12,11 @@
  * Return: The number of characters printed (excluding the null byte
  *         used to end output to strings)
  */
+
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int printed = 0;
-	char c;
-	char *str;
+	int outlen = 0;
 
 	va_start(args, format);
 
@@ -31,34 +30,11 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			switch (*format)
-			{
-				case 'c':
-					c = (char)va_arg(args, int);
-					printed += write(1, &c, 1);
-					break;
-				case 's':
-					str = va_arg(args, char *);
-					if (str == NULL)
-						str = "(null)";
-					while (*str)
-					{
-						printed += write(1, str, 1);
-						str++;
-					}
-					break;
-				case '%':
-					printed += write(1, "%", 1);
-					break;
-				default:
-					printed += write(1, "%", 1);
-					printed += write(1, &(*format), 1);
-					break;
-			}
+			get_printf(*format, args);
 		}
 		else
 		{
-			printed += write(1, &(*format), 1);
+			outlen += _putchar(*format);
 		}
 
 		format++;
@@ -66,5 +42,5 @@ int _printf(const char *format, ...)
 
 	va_end(args);
 
-	return (printed);
+	return (outlen);
 }
