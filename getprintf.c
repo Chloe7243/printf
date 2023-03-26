@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * get_printf - prints value
@@ -30,6 +31,8 @@ int get_printf(char c, va_list args)
 		case '%':
 			rval += _putchar('%');
 			break;
+		default:
+			rval += _putchar(c);
 	}
 
 	return (rval);
