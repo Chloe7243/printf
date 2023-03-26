@@ -19,12 +19,10 @@ int _printf(const char *format, ...)
 
 	for (i = 0; i < len; i++)
 	{
-		if (format[i - 1] == '%' && format[i - 2] != '%')
-			continue;
-
 		if (format[i] == '%')
 		{
-			switch (format[i + 1])
+			i++;
+			switch (format[i])
 			{
 				case 'c':
 					outlen += _putchar(va_arg(args, int));
@@ -43,9 +41,9 @@ int _printf(const char *format, ...)
 					outlen += _putchar('%');
 					break;
 			}
-			continue;
 		}
-		outlen += _putchar(format[i]);
+		else
+			outlen += _putchar(format[i]);
 	}
 	va_end(args);
 
