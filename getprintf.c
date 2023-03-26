@@ -22,6 +22,9 @@ int get_printf(char c, va_list args)
 			break;
 		case 's':
 			s = va_arg(args, char*);
+			if (!s)
+				s = "(nil)";
+
 			while (*s != '\0')
 			{
 				rval += _putchar(*s);
