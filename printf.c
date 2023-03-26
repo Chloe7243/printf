@@ -16,6 +16,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int outlen = 0;
+	char *s;
 
 	va_start(args, format);
 
@@ -50,9 +51,10 @@ int _printf(const char *format, ...)
 					break;
 				default:
 					outlen += _putchar('%');
-					outlen += _putchar(c);
+					outlen += _putchar(*format);
 					break;
 			}
+			
 		}
 		else
 		{
@@ -65,3 +67,4 @@ int _printf(const char *format, ...)
 	va_end(args);
 
 	return (outlen);
+}
