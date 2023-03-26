@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 /**
  * _printf - Produces output according to a format
  *
@@ -30,7 +29,30 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			get_printf(*format, args);
+			switch (*format)
+			{
+				case 'c':
+					outlen += _putchar(va_arg(args, int));
+					break;
+				case 's':
+					s = va_arg(args, char*);
+					if (s == NULL)
+						s = "(null)";
+
+					while (*s)
+					{
+						outlen += _putchar(*s);
+						s++;
+					}
+					break;
+				case '%':
+					outlen += _putchar('%');
+					break;
+				default:
+					outlen += _putchar('%');
+					outlen += _putchar(c);
+					break;
+			}
 		}
 		else
 		{
@@ -43,4 +65,3 @@ int _printf(const char *format, ...)
 	va_end(args);
 
 	return (outlen);
-}
