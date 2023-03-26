@@ -16,7 +16,6 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int outlen = 0;
-	char *s;
 
 	va_start(args, format);
 
@@ -30,31 +29,7 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			switch (*format)
-			{
-				case 'c':
-					outlen += _putchar(va_arg(args, int));
-					break;
-				case 's':
-					s = va_arg(args, char*);
-					if (s == NULL)
-						s = "(null)";
-
-					while (*s)
-					{
-						outlen += _putchar(*s);
-						s++;
-					}
-					break;
-				case '%':
-					outlen += _putchar('%');
-					break;
-				default:
-					outlen += _putchar('%');
-					outlen += _putchar(*format);
-					break;
-			}
-			
+			outlen += get_printf(*format, args);
 		}
 		else
 		{
