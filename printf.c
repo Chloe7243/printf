@@ -50,7 +50,6 @@ int _printf(const char *format, ...)
 			outlen += _putchar(format[i]);
 	}
 
-	_putchar(-1);
 	va_end(args);
 
 	return (outlen);
