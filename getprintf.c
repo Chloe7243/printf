@@ -22,14 +22,7 @@ int get_printf(char c, va_list args)
 			break;
 		case 's':
 			s = va_arg(args, char*);
-			if (s == NULL)
-				s = "(null)";
-
-			while (*s)
-			{
-				rval += _putchar(*s);
-				s++;
-			}
+			rval += print_string(s);
 			break;
 		case '%':
 			rval += _putchar('%');
