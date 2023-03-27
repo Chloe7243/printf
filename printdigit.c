@@ -1,7 +1,13 @@
 #include "main.h"
 #include <stdio.h>
 
-
+/**
+ * count_digit - count number of digits
+ *
+ * @num: number
+ *
+ * Return: int
+ */
 
 int count_digit(int num)
 {
@@ -15,11 +21,10 @@ int count_digit(int num)
 	}
 	else
 		n = num;
-	do
-	{
+	do {
 		count++;
 		n /= 10;
-	}while (n != 0);
+	} while (n != 0);
 
 	return (count);
 }
