@@ -13,6 +13,7 @@ int print_digit(int num)
 {
 	int count = 0;
 	unsigned int n;
+	signed int n1;
 
 	if (num < 0)
 	{
@@ -27,7 +28,9 @@ int print_digit(int num)
 		print_digit(n / 10);
 	}
 
-	count += _putchar('0' + (n % 10));
+	n1 = n % 10;
+
+	count += _putchar('0' + n1);
 
 	return (count);
 }
