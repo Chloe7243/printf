@@ -16,11 +16,6 @@ int count_digit(int num, int divisor)
 	int count = 0;
 	unsigned int n;
 
-	if (divisor == 2 && num < 0)
-	{
-		return (0);
-	}
-
 	if (num < 0)
 	{
 		n = -num;
@@ -33,7 +28,7 @@ int count_digit(int num, int divisor)
 		n /= divisor;
 	} while (n != 0);
 
-	return (divisor == 2 ? --count : count);
+	return (count);
 }
 
 /**
