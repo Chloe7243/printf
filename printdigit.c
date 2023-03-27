@@ -5,6 +5,7 @@
  * count_digit - count number of digits
  *
  * @num: number
+ * @divisor: divisor
  *
  * Return: int
  */
@@ -70,12 +71,8 @@ void print_digit(int num)
  * Return: void
  */
 
-void print_binary(int num)
+void print_binary(unsigned int num)
 {
-	if (num < 0)
-	{
-		_putchar('0');
-	}
 	if (num > 1)
 	{
 		print_binary(num / 2);
