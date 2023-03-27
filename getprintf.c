@@ -30,8 +30,13 @@ int get_printf(char c, va_list args)
 		case 'd':
 		case 'i':
 			digit = va_arg(args, int);
-			rval += count_digit(digit);
+			rval += count_digit(digit, 10);
 			print_digit(digit);
+			break;
+		case 'b':
+			digit = va_arg(args, int);
+			rval += count_digit(digit, 2);
+			print_binary(digit);
 			break;
 		default:
 			rval += _putchar('%');

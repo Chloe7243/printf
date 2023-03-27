@@ -9,10 +9,15 @@
  * Return: int
  */
 
-int count_digit(int num)
+int count_digit(int num, int divisor)
 {
 	int count = 0;
 	unsigned int n;
+
+	if (divisor == 2 && num < 0)
+	{
+		return (0);
+	}
 
 	if (num < 0)
 	{
@@ -23,10 +28,10 @@ int count_digit(int num)
 		n = num;
 	do {
 		count++;
-		n /= 10;
+		n /= divisor;
 	} while (n != 0);
 
-	return (count);
+	return (divisor == 2 ? --count : count);
 }
 
 /**
@@ -55,4 +60,25 @@ void print_digit(int num)
 	}
 
 	_putchar('0' + n % 10);
+}
+
+/**
+ * print_binary - prints binary version of a digit
+ *
+ * @num: number
+ *
+ * Return: void
+ */
+
+void print_binary(int num)
+{
+	if (num < 0)
+	{
+		_putchar('0');
+	}
+	if (num > 1)
+	{
+		print_binary(num / 2);
+	}
+	_putchar('0' + num % 2);
 }
