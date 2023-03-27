@@ -28,7 +28,6 @@ int get_printf(char c, va_list args)
 			rval += _putchar('%');
 			break;
 		case 'd':
-		case 'i':
 			digit = va_arg(args, int);
 			rval += print_digit(digit);
 			break;
