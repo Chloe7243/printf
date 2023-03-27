@@ -12,7 +12,7 @@
 
 int get_printf(char c, va_list args)
 {
-	int rval = 0;
+	int digit, rval = 0;
 	char *s;
 
 	switch (c)
@@ -33,6 +33,11 @@ int get_printf(char c, va_list args)
 			break;
 		case '%':
 			rval += _putchar('%');
+			break;
+		case 'd':
+		case 'i':
+			digit = va_arg(args, int);
+			rval += print_digit(digit);
 			break;
 		default:
 			rval += _putchar('%');
