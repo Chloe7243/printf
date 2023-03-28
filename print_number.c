@@ -38,7 +38,6 @@ int print_number(int n, int base, int is_unsigned, int is_lowercase)
 	{
 		printed += _putchar(buffer[i]);
 	}
-	printf("\n%d:%d\n", base, printed);
 
 	return (printed);
 }
