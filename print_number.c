@@ -14,7 +14,7 @@
 int print_number(int n, int base, int is_unsigned, int is_lowercase)
 {
 	char *digits = (is_lowercase) ? "0123456789abcdef" : "0123456789ABCDEF";
-	int printed, i = 0, digit;
+	int printed = 0, i = 0, digit;
 	char buffer[1024];
 
 	if (is_unsigned == 1)
@@ -29,15 +29,16 @@ int print_number(int n, int base, int is_unsigned, int is_lowercase)
 	if (buffer[0] != '0')
 	{
 		if (base == 16)
-			is_lowercase == 1 ? _puts("0x") : _puts("0X");
+			printed += is_lowercase == 1 ? _puts("0x") : _puts("0X");
 		if (base == 8)
-			_putchar('0');
+			printed += _putchar('0');
 	}
 
 	for (i = (i - 1); i >= 0; i--)
 	{
 		printed += _putchar(buffer[i]);
 	}
+	printf("\n%d:%d\n", base, printed);
 
 	return (printed);
 }
