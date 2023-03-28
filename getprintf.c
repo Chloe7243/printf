@@ -50,6 +50,10 @@ int get_printf(char c, va_list args)
 		case 'X':
 			rval += print_number(digit, 16, 1, 0);
 			break;
+		case 'S':
+			s = va_arg(args, char*);
+			rval += print_string_S(s);
+			break;
 		default:
 			rval += _putchar('%');
 			rval += _putchar(c);

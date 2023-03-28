@@ -49,6 +49,8 @@ int print_string_S(char *s)
 		{
 			puts("\\x");
 			print_number((int) (*s), 16, 1, 0);
+			count += _puts("\\x0");
+			count += print_number(*s, 16, 1, 0);
 		}
 		else
 			count += _putchar(*s);
