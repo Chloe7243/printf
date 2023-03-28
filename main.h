@@ -13,6 +13,6 @@ void print_digit(int num);
 int print_binary(unsigned int num);
 int print_string(char *s);
 int count_digit(int num, int divisor);
-int print_number(int n, int base, int is_unsigned);
+int print_number(int n, int base, int is_unsigned, int is_lowercase);
 
 #endif
