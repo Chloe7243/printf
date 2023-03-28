@@ -13,7 +13,7 @@ int print_number(int n, int base, int is_unsigned)
 {
 	char *digits = "0123456789abcdef";
 	int printed, i = 0, digit;
-	char buffer[50];
+	char buffer[1024];
 
 
 	if (is_unsigned == 1)
