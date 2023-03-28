@@ -9,9 +9,35 @@
 
 int _putchar(char c)
 {
-	if (sizeof(c) != 1)
+	static char buffer[1024];
+	static int i;
+
+	if (c == -1 || i >= 1024)
 	{
-		system("clear");
+		write(1, &buffer, i);
+		i = 0;
 	}
-	return (write(STDOUT_FILENO, &c, 1));
+
+	if (c != -1)
+	{
+		buffer[i] = c;
+		i++;
+	}
+
+	return (1);
+}
+
+
+/**
+ * _puts - prints a string to stdout
+ * @str: pointer to the string to print
+ * Return: number of chars written
+ */
+int _puts(char *str)
+{
+	register int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+		_putchar(str[i]);
+	return (i);
 }
