@@ -37,6 +37,9 @@ int get_printf(char c, va_list args)
 			digit = va_arg(args, unsigned int);
 			rval += print_binary(digit);
 			break;
+		case 'S':
+			s = va_arg(args, char*);
+			rval += print_string_S(s);
 		default:
 			rval += _putchar('%');
 			rval += _putchar(c);
