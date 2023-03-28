@@ -26,10 +26,13 @@ int print_number(int n, int base, int is_unsigned, int is_lowercase)
 		n /= base;
 	} while (n > 0);
 
-	if (base == 16)
-		is_lowercase == 1 ? _puts("0x") : _puts("0X");
-	if (base == 8)
-		_putchar('0');
+	if (buffer[0] != '0')
+	{
+		if (base == 16)
+			is_lowercase == 1 ? _puts("0x") : _puts("0X");
+		if (base == 8)
+			_putchar('0');
+	}
 
 	for (i = (i - 1); i >= 0; i--)
 	{
