@@ -39,10 +39,10 @@ int get_printf(char c, va_list args)
 			print_binary(digit);
 			break;
 		case 'u':
-			rval += print_number(digit, 10, 1, 0);
+			rval += print_number(digit, 10, 1, 1);
 			break;
 		case 'o':
-			rval += print_number(digit, 8, 1, 0);
+			rval += print_number(digit, 8, 1, 1);
 			break;
 		case 'x':
 			rval += print_number(digit, 16, 1, 1);
