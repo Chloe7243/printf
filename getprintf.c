@@ -40,6 +40,7 @@ int get_printf(char c, va_list args)
 		case 'S':
 			s = va_arg(args, char*);
 			rval += print_string_S(s);
+			break;
 		default:
 			rval += _putchar('%');
 			rval += _putchar(c);
