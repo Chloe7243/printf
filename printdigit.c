@@ -67,12 +67,28 @@ void print_digit(int num)
  * Return: number of binaries printed
  */
 
-void print_binary(unsigned int num)
+int print_binary(unsigned int n)
 {
+	unsigned int m, i, sum;
+	unsigned int a[32];
+	int count;
 
-	if (num > 1)
+	m = 2147483648; /* (2 ^ 31) */
+	a[0] = n / m;
+	for (i = 1; i < 32; i++)
 	{
-		print_binary(num / 2);
+		m /= 2;
+		a[i] = (n / m) % 2;
 	}
-	_putchar('0' + num % 2);
+	for (i = 0, sum = 0, count = 0; i < 32; i++)
+	{
+		sum += a[i];
+		if (sum || i == 31)
+		{
+			count += _putchar('0' + a[i]);
+
+		}
+	}
+	return (count);
+
 }

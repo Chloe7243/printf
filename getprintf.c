@@ -35,8 +35,7 @@ int get_printf(char c, va_list args)
 			break;
 		case 'b':
 			digit = va_arg(args, unsigned int);
-			print_binary(digit);
-			rval += count_digit(digit, 2);
+			rval += print_binary(digit);
 			break;
 		default:
 			rval += _putchar('%');
