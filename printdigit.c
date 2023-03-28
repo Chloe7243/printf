@@ -64,11 +64,12 @@ void print_digit(int num)
  *
  * @num: number
  *
- * Return: void
+ * Return: number of binaries printed
  */
 
 void print_binary(unsigned int num)
 {
+
 	if (num > 1)
 	{
 		print_binary(num / 2);
