@@ -45,10 +45,10 @@ int print_string_S(char *s)
 
 	while (*s)
 	{
-		if ((*s < 32 || *s >= 127) && *s > 0)
+		if ((*s <= 32 || *s >= 127) && *s > 0)
 		{
 			puts("\\x");
-			print_number((int) (*s), 16, 0);
+			print_number((unsigned int)(*s), 16, 0);
 			count += _puts("\\x0");
 			count += print_number(*s, 16, 0);
 		}
