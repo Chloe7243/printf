@@ -45,7 +45,7 @@ int print_string_S(char *s)
 
 	while (*s)
 	{
-		if ((*s < 32 && *s > 0) || *s >= 127)
+		if ((*s < 32 || *s >= 127) && *s > 0)
 		{
 			puts("\\x");
 			print_number((int) (*s), 16, 0);
