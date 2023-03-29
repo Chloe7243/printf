@@ -57,6 +57,9 @@ int get_printf(char c, va_list args)
 			s = va_arg(args, char*);
 			rval += print_string_S(s);
 			break;
+		case 'p':
+			rval += print_address(va_arg(args, unsigned long int));
+			break;
 		default:
 			rval += _putchar('%');
 			rval += _putchar(c);

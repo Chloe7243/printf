@@ -17,5 +17,6 @@ int print_string(char *s);
 int print_string_S(char *s);
 int count_digit(int num, int divisor);
 int print_number(unsigned int n, int base, int is_lowercase);
+int print_address(unsigned long int p);
 
 #endif

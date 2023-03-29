@@ -29,3 +29,28 @@ int print_number(unsigned int n, int base, int is_lowercase)
 
 	return (printed);
 }
+
+int print_address(unsigned long int p)
+{
+	int count = 0, i = 0, digit;
+	char *digits = "0123456789abcdef";
+	char buffer[1024];
+
+	if (!p)
+		return (_puts("(nil)"));
+	count += _puts("0x");
+
+	do {
+		digit = p % 16;
+		buffer[i++] = digits[digit];
+		p /= 16;
+	} while (p > 0);
+
+	for (i = (i - 1); i >= 0; i--)
+	{
+		count += _putchar(buffer[i]);
+	}
+
+	return (count);
+}
+
