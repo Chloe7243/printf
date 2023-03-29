@@ -38,7 +38,7 @@ int print_string(char *s)
 
 int print_string_S(char *s)
 {
-	int count = 0, n;
+	int count = 0;
 
 	if (s == NULL)
 		s = "(null)";
@@ -47,8 +47,10 @@ int print_string_S(char *s)
 	{
 		if ((*s < 32 || *s >= 127) && *s > 0)
 		{
-			puts("\\x0");
-			n = print_number((unsigned int)(*s), 16, 0);
+			puts("\\x");
+			if (*s <= 15)
+				_putchar('0');
+			print_number((unsigned int)(*s), 16, 0);
 			count += print_number(*s, 16, 0);
 		}
 		else
