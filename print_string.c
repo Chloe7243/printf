@@ -50,8 +50,7 @@ int print_string_S(char *s)
 			puts("\\x");
 			if (*s <= 15)
 				count += _putchar('0');
-			print_number((unsigned int)(*s), 16, 0);
-			count += print_number(*s, 16, 0);
+			count += print_number((unsigned int)*s, 16, 0);
 		}
 		else
 			count += _putchar(*s);
