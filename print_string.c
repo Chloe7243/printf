@@ -85,3 +85,35 @@ int print_string_S(char *s)
 
 	return (count);
 }
+
+/**
+ * print_rot13_string - prints a rot13 string
+ *
+ * @s: string
+ *
+ * Return: int
+ */
+
+int print_rot13_string(char *s)
+{
+	int count = 0, i, j;
+	char a[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char b[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	if (s == NULL)
+		_puts("(ahyy)");
+
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		for (j = 0; a[j] != '\0'; j++)
+		{
+			if (s[i] == a[j])
+			{
+				count += _putchar(b[j]);
+				break;
+			}
+		}
+	}
+
+	return (count);
+}

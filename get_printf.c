@@ -64,6 +64,10 @@ int get_printf(char c, va_list args)
 			s = va_arg(args, char*);
 			rval += print_rev_string(s);
 			break;
+		case 'R':
+			s = va_arg(args, char*);
+			rval += print_rot13_string(s);
+			break;
 		default:
 			rval += _putchar('%');
 			rval += _putchar(c);
