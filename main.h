@@ -11,6 +11,7 @@ int _putchar(char c);
 int _puts(char *str);
 int _printf(const char *frmat, ...);
 int get_printf(char c, va_list args);
+int get_printf_2(char c, va_list args);
 void print_digit(int num);
 int print_binary(unsigned int num);
 int print_string(char *s);

@@ -12,7 +12,7 @@
 
 int get_printf(char c, va_list args)
 {
-	int digit, rval = 0;
+	int rval = 0;
 	char *s;
 
 	switch (c)
@@ -27,6 +27,44 @@ int get_printf(char c, va_list args)
 		case '%':
 			rval += _putchar('%');
 			break;
+		case 'S':
+			s = va_arg(args, char*);
+			rval += print_string_S(s);
+			break;
+		case 'p':
+			rval += print_address(va_arg(args, unsigned long int));
+			break;
+		case 'r':
+			s = va_arg(args, char*);
+			rval += print_rev_string(s);
+			break;
+		case 'R':
+			s = va_arg(args, char*);
+			rval += print_rot13_string(s);
+			break;
+		default:
+			rval += get_printf_2(c, args);
+			break;
+	}
+
+	return (rval);
+}
+
+/**
+ * get_printf_2 - prints value
+ *
+ * @c: char value
+ * @args: arguments
+ *
+ * Return: integer
+ */
+
+int get_printf_2(char c, va_list args)
+{
+	int digit, rval = 0;
+
+	switch (c)
+	{
 		case 'd':
 		case 'i':
 			digit = va_arg(args, int);
@@ -52,21 +90,6 @@ int get_printf(char c, va_list args)
 		case 'X':
 			digit = va_arg(args, unsigned int);
 			rval += print_number(digit, 16, 0);
-			break;
-		case 'S':
-			s = va_arg(args, char*);
-			rval += print_string_S(s);
-			break;
-		case 'p':
-			rval += print_address(va_arg(args, unsigned long int));
-			break;
-		case 'r':
-			s = va_arg(args, char*);
-			rval += print_rev_string(s);
-			break;
-		case 'R':
-			s = va_arg(args, char*);
-			rval += print_rot13_string(s);
 			break;
 		default:
 			rval += _putchar('%');
