@@ -60,6 +60,10 @@ int get_printf(char c, va_list args)
 		case 'p':
 			rval += print_address(va_arg(args, unsigned long int));
 			break;
+		case 'r':
+			s = va_arg(args, char*);
+			rval += print_rev_string(s);
+			break;
 		default:
 			rval += _putchar('%');
 			rval += _putchar(c);
