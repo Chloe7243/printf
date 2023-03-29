@@ -31,9 +31,6 @@ int get_printf(char c, va_list args)
 			s = va_arg(args, char*);
 			rval += print_string_S(s);
 			break;
-		case 'p':
-			rval += print_address(va_arg(args, unsigned long int));
-			break;
 		case 'r':
 			s = va_arg(args, char*);
 			rval += print_rev_string(s);
@@ -74,6 +71,9 @@ int get_printf_2(char c, va_list args)
 		case 'b':
 			digit = va_arg(args, unsigned int);
 			rval += print_binary(digit);
+			break;
+		case 'p':
+			rval += print_address(va_arg(args, unsigned long int));
 			break;
 		case 'u':
 			digit = va_arg(args, unsigned int);

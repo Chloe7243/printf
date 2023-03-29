@@ -15,7 +15,8 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int outlen = 0;
+	int i, outlen = 0;
+	char flags[] = "#0 -+";
 
 	va_start(args, format);
 
@@ -29,6 +30,14 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+
+			for (i = 0; flags[i] != '\0'; i++)
+			{
+				if (*format == flags[i])
+				{
+					format++;
+				}
+			}
 			outlen += get_printf(*format, args);
 		}
 		else

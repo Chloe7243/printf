@@ -1,7 +1,6 @@
 #include "main.h"
 #include <stdio.h>
 
-
 /**
  * print_number - prints a number to standard output stream
  * @n: number to be printed
