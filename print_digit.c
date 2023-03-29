@@ -73,7 +73,7 @@ int print_binary(unsigned int n)
 	unsigned int a[32];
 	int count;
 
-	m = 2147483648; /* (2 ^ 31) */
+	m = 2147483648;
 	a[0] = n / m;
 	for (i = 1; i < 32; i++)
 	{

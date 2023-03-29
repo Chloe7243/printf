@@ -15,7 +15,6 @@ int get_printf(char c, va_list args)
 	int digit, rval = 0;
 	char *s;
 
-	digit = va_arg(args, int);
 	switch (c)
 	{
 		case 'c':
@@ -30,6 +29,7 @@ int get_printf(char c, va_list args)
 			break;
 		case 'd':
 		case 'i':
+			digit = va_arg(args, int);
 			rval += count_digit(digit, 10);
 			print_digit(digit);
 			break;
@@ -37,6 +37,26 @@ int get_printf(char c, va_list args)
 			digit = va_arg(args, unsigned int);
 			rval += (count_digit(digit, 2) - 1);
 			print_binary(digit);
+			break;
+		case 'u':
+			digit = va_arg(args, unsigned int);
+			rval += print_number(digit, 10, 1);
+			break;
+		case 'o':
+			digit = va_arg(args, unsigned int);
+			rval += print_number(digit, 8, 1);
+			break;
+		case 'x':
+			digit = va_arg(args, unsigned int);
+			rval += print_number(digit, 16, 1);
+			break;
+		case 'X':
+			digit = va_arg(args, unsigned int);
+			rval += print_number(digit, 16, 0);
+			break;
+		case 'S':
+			s = va_arg(args, char*);
+			rval += print_string_S(s);
 			break;
 		default:
 			rval += _putchar('%');

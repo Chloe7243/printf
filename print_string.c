@@ -48,9 +48,9 @@ int print_string_S(char *s)
 		if ((*s < 32 && *s > 0) || *s >= 127)
 		{
 			puts("\\x");
-			print_number((int) (*s), 16, 1, 0);
+			print_number((int) (*s), 16, 0);
 			count += _puts("\\x0");
-			count += print_number(*s, 16, 1, 0);
+			count += print_number(*s, 16, 0);
 		}
 		else
 			count += _putchar(*s);
