@@ -30,6 +30,12 @@ int print_number(unsigned int n, int base, int is_lowercase)
 	return (printed);
 }
 
+/**
+ *  print_address - prints a number to standard output stream
+ *  @p: number to be printed
+ *   Return: number of printed values
+ */
+
 int print_address(unsigned long int p)
 {
 	int count = 0, i = 0, digit;
