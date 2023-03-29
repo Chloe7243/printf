@@ -107,7 +107,7 @@ int print_rot13_string(char *s)
 	{
 		if (s[i] < 65 || (s[i] > 90 && s[i] < 97) || s[i] > 122)
 		{
-			_putchar(s[j]);
+			count += _putchar(s[j]);
 			continue;
 		}
 
