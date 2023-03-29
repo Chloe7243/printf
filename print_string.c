@@ -101,10 +101,16 @@ int print_rot13_string(char *s)
 	char b[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	if (s == NULL)
-		_puts("(ahyy)");
+		s = "(null)";
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
+		if (s[i] < 65 || (s[i] > 90 && s[i] < 97) || s[i] > 122)
+		{
+			_putchar(s[j]);
+			continue;
+		}
+
 		for (j = 0; a[j] != '\0'; j++)
 		{
 			if (s[i] == a[j])
