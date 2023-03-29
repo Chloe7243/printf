@@ -62,7 +62,7 @@ void print_digit(int num)
 /**
  * print_binary - prints binary version of a digit
  *
- * @num: number
+ * @n: number
  *
  * Return: number of binaries printed
  */
