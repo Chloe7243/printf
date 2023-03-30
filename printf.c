@@ -33,6 +33,8 @@ int _printf(const char *format, ...)
 			format++;
 			flag_p = format;
 			flag_struct = get_flags(flag_p);
+			if (*format == 'l' || *format == 'h')
+				format++;
 			if (is_flag(*format))
 			{
 				format += flag_struct.length;
