@@ -6,6 +6,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+typedef struct FLAGS
+{
+	int sign;
+	int justify;
+	int precision;
+	int length;
+	char *flags;
+} FLAGS;
+
 
 int _putchar(char c);
 int _puts(char *str);
