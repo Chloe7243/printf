@@ -21,7 +21,7 @@ int print_number(unsigned long int n, int base, int is_lowercase, char *prefix)
 		n /= base;
 	} while (n > 0);
 
-	_puts(prefix);
+	printed += _puts(prefix);
 	for (i = (i - 1); i >= 0; i--)
 	{
 		printed += _putchar(buffer[i]);
