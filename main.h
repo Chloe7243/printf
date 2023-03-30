@@ -32,5 +32,6 @@ int print_number(unsigned int n, int base, int is_lowercase);
 int print_address(unsigned long int p);
 int is_flag(char c);
 FLAGS get_flags(char *format);
+int handle_flag(FLAGS flag_struct, char *format);
 
 #endif
