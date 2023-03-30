@@ -30,10 +30,10 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			flag_struct = get_flags(format);
-			if (flag_struct.length > 0)
+			if (is_flag(*format))
 			{
-				format += flag_struct.length;
+				flag_struct = get_flags(format);
+				/* format += flag_struct.length; */
 				/* handle_flags(flag_struct, format); */
 			}
 			else
