@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
 			if (flag_struct.length > 0)
 			{
 				format += flag_struct.length;
-				handle_flags(flag_struct, format);
+				/* handle_flags(flag_struct, format); */
 			}
 			else
 				outlen += get_printf(*format, args);

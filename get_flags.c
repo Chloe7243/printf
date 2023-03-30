@@ -12,6 +12,8 @@ FLAGS get_flags(const char *format)
 {
 	FLAGS flag_struct = {0, 0, 0, 0, ""};
 	char *flags = flag_struct.flags;
+	char num[10] = "0";
+	int i  =  0;
 
 	while (is_flag(*format))
 	{
@@ -23,11 +25,13 @@ FLAGS get_flags(const char *format)
 	format++;
 
 
-	if (*format > '0' &&  *format <= '9')
+	while (*format > '0' &&  *format <= '9')
 	{
 		flag_struct.length += 1;
-		flag_struct.precision = atoi((char) *format);
+		num[i++] = *format;
 	}
+
+	flag_struct.precision = atoi(num);
 	while (*flags)
 	{
 		if (*flags == '+' || *flags == ' ')
