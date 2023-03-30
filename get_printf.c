@@ -65,7 +65,6 @@ int get_printf_2(char c, va_list args)
 		case 'd':
 		case 'i':
 			digit = va_arg(args, long int);
-			printf(" d:%ld", digit);
 			rval += count_digit(digit, 10);
 			print_digit(digit);
 			break;
