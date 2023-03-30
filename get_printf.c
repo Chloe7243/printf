@@ -81,21 +81,21 @@ int get_printf_2(char hash, char size, char c, va_list args)
 			rval += print_number(digit, 10, 1, prefix);
 			break;
 		case 'o':
-			if (hash == '#')
-				prefix = "0";
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
+			if (hash == '#' && digit != 0)
+				prefix = "0";
 			rval += print_number(digit, 8, 1, prefix);
 			break;
 		case 'x':
-			if (hash == '#')
-				prefix = "0x";
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
+			if (hash == '#' && digit != 0)
+				prefix = "0x";
 			rval += print_number(digit, 16, 1, prefix);
 			break;
 		case 'X':
-			if (hash == '#')
-				prefix = "0X";
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
+			if (hash == '#' && digit != 0)
+				prefix = "0X";
 			rval += print_number(digit, 16, 0, prefix);
 			break;
 		default:
