@@ -61,6 +61,7 @@ int is_flag(char c)
 	{
 		if (c == *flags)
 			return (1);
+		flags++;
 	}
 
 	return (0);
