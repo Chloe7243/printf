@@ -10,7 +10,7 @@
  * Return: integer
  */
 
-int get_printf(char c, va_list args)
+int get_printf(char size, char c, va_list args)
 {
 	int rval = 0;
 	char *s;
@@ -40,7 +40,7 @@ int get_printf(char c, va_list args)
 			rval += print_rot13_string(s);
 			break;
 		default:
-			rval += get_printf_2(c, args);
+			rval += get_printf_2(size, c, args);
 			break;
 	}
 
@@ -56,7 +56,7 @@ int get_printf(char c, va_list args)
  * Return: integer
  */
 
-int get_printf_2(char c, va_list args)
+int get_printf_2(char size, char c, va_list args)
 {
 	long int digit, rval = 0;
 
@@ -64,7 +64,7 @@ int get_printf_2(char c, va_list args)
 	{
 		case 'd':
 		case 'i':
-			digit = va_arg(args, long int);
+			digit = (size == 'l') ? va_arg(args, long int) : va_arg(args, int);
 			rval += count_digit(digit, 10);
 			print_digit(digit);
 			break;
@@ -76,19 +76,19 @@ int get_printf_2(char c, va_list args)
 			rval += print_address(va_arg(args, unsigned long int));
 			break;
 		case 'u':
-			digit = va_arg(args, unsigned int);
+			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
 			rval += print_number(digit, 10, 1);
 			break;
 		case 'o':
-			digit = va_arg(args, unsigned int);
+			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
 			rval += print_number(digit, 8, 1);
 			break;
 		case 'x':
-			digit = va_arg(args, unsigned int);
+			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
 			rval += print_number(digit, 16, 1);
 			break;
 		case 'X':
-			digit = va_arg(args, unsigned int);
+			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
 			rval += print_number(digit, 16, 0);
 			break;
 		default:

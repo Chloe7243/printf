@@ -14,7 +14,7 @@
 int count_digit(long int num, int divisor)
 {
 	int count = 0;
-	unsigned int n;
+	unsigned long int n;
 
 	if (num < 0)
 	{
