@@ -11,7 +11,7 @@
  * Return: int
  */
 
-int count_digit(int num, int divisor)
+int count_digit(long int num, int divisor)
 {
 	int count = 0;
 	unsigned int n;
@@ -39,9 +39,9 @@ int count_digit(int num, int divisor)
  * Return: void
  */
 
-void print_digit(int num)
+void print_digit(long int num)
 {
-	unsigned int n;
+	unsigned long int n;
 
 	if (num < 0)
 	{

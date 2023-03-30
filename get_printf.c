@@ -58,13 +58,14 @@ int get_printf(char c, va_list args)
 
 int get_printf_2(char c, va_list args)
 {
-	int digit, rval = 0;
+	long int digit, rval = 0;
 
 	switch (c)
 	{
 		case 'd':
 		case 'i':
-			digit = va_arg(args, int);
+			digit = va_arg(args, long int);
+			printf(" d:%ld", digit);
 			rval += count_digit(digit, 10);
 			print_digit(digit);
 			break;

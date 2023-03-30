@@ -9,7 +9,7 @@
  * Return: number of digits printed
  */
 
-int print_number(unsigned int n, int base, int is_lowercase)
+int print_number(unsigned long int n, int base, int is_lowercase)
 {
 	char *digits = (is_lowercase) ? "0123456789abcdef" : "0123456789ABCDEF";
 	int printed = 0, i = 0, digit;
