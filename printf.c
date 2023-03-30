@@ -17,6 +17,7 @@ int _printf(const char *format, ...)
 	va_list args;
 	int i, outlen = 0;
 	char flags[] = "#0 -+";
+	FLAGS flag_struct;
 
 	va_start(args, format);
 
@@ -35,7 +36,8 @@ int _printf(const char *format, ...)
 			{
 				if (*format == flags[i])
 				{
-					format++;
+					flag_struct = get_flags(*format);
+					break;
 				}
 			}
 			outlen += get_printf(*format, args);

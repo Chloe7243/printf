@@ -12,7 +12,7 @@ typedef struct FLAGS
 	int justify;
 	int precision;
 	int length;
-	char *flags;
+	char flags[10];
 } FLAGS;
 
 
@@ -30,5 +30,7 @@ int print_string_S(char *s);
 int count_digit(int num, int divisor);
 int print_number(unsigned int n, int base, int is_lowercase);
 int print_address(unsigned long int p);
+int is_flag(char c);
+FLAGS get_flags(char *format);
 
 #endif
