@@ -28,7 +28,7 @@ FLAGS get_flags(const char *format)
 	while (*format > '0' &&  *format <= '9')
 	{
 		flag_struct.length += 1;
-		num[i++] = *format;
+		num[i++] = *format++;
 	}
 
 	flag_struct.precision = atoi(num);
