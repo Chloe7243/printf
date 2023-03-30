@@ -24,8 +24,10 @@ FLAGS get_flags(char *format)
 
 
 	if (*format > '0' &&  *format <= '9')
+	{
+		flag_struct.length += 1;
 		flag_struct.precision = atoi(*format);
-
+	}
 	while (*flags)
 	{
 		if (*flags == '+' || *flags == ' ')
