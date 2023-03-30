@@ -9,4 +9,4 @@
  */
 
 
-int handle_flags(FLAGS flag_struct, char *format);
+int handle_flags(FLAGS flag_struct, const char *format);

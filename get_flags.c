@@ -8,9 +8,9 @@
  */
 
 
-FLAGS get_flags(char *format)
+FLAGS get_flags(const char *format)
 {
-	FLAGS flag_struct = {.sign = 0, .justify = 0, .precision = 0, .length = 0};
+	FLAGS flag_struct = {0, 0, 0, 0, ""};
 	char *flags = flag_struct.flags;
 
 	while (is_flag(*format))
@@ -26,7 +26,7 @@ FLAGS get_flags(char *format)
 	if (*format > '0' &&  *format <= '9')
 	{
 		flag_struct.length += 1;
-		flag_struct.precision = atoi(*format);
+		flag_struct.precision = atoi((char) *format);
 	}
 	while (*flags)
 	{
