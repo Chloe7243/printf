@@ -10,7 +10,7 @@
  * Return: integer
  */
 
-int get_printf(char size, char c, va_list args)
+int get_printf(char hash, char size, char c, va_list args)
 {
 	int rval = 0;
 	char *s;
@@ -40,7 +40,7 @@ int get_printf(char size, char c, va_list args)
 			rval += print_rot13_string(s);
 			break;
 		default:
-			rval += get_printf_2(size, c, args);
+			rval += get_printf_2(hash, size, c, args);
 			break;
 	}
 
@@ -56,9 +56,10 @@ int get_printf(char size, char c, va_list args)
  * Return: integer
  */
 
-int get_printf_2(char size, char c, va_list args)
+int get_printf_2(char hash, char size, char c, va_list args)
 {
 	long int digit, rval = 0;
+	char *prefix = "";
 
 	switch (c)
 	{
@@ -77,19 +78,25 @@ int get_printf_2(char size, char c, va_list args)
 			break;
 		case 'u':
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
-			rval += print_number(digit, 10, 1);
+			rval += print_number(digit, 10, 1, prefix);
 			break;
 		case 'o':
+			if (hash == '#')
+				prefix = "0";
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
-			rval += print_number(digit, 8, 1);
+			rval += print_number(digit, 8, 1, prefix);
 			break;
 		case 'x':
+			if (hash == '#')
+				prefix = "0x";
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
-			rval += print_number(digit, 16, 1);
+			rval += print_number(digit, 16, 1, prefix);
 			break;
 		case 'X':
+			if (hash == '#')
+				prefix = "0X";
 			digit = (size == 'l') ? va_arg(args, unsigned long int) : va_arg(args, unsigned int);
-			rval += print_number(digit, 16, 0);
+			rval += print_number(digit, 16, 0, prefix);
 			break;
 		default:
 			rval += _putchar('%');

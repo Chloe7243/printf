@@ -18,6 +18,7 @@ int _printf(const char *format, ...)
 	int outlen = 0;
 	const char *flag_p;
 	char int_size;
+	char hash;
 	FLAGS flag_struct;
 
 	va_start(args, format);
@@ -34,6 +35,12 @@ int _printf(const char *format, ...)
 			format++;
 			flag_p = format;
 			flag_struct = get_flags(flag_p);
+			if(*format == '#')
+			{
+				if (*format == '#')
+					hash = '#';
+				format++;
+			}
 			if (*format == 'l' || *format == 'h')
 			{
 				if (*format == 'l')
@@ -46,7 +53,7 @@ int _printf(const char *format, ...)
 				/* handle_flags(flag_struct, format); */
 			}
 			else
-				outlen += get_printf(int_size, *format, args);
+				outlen += get_printf(hash, int_size, *format, args);
 		}
 		else
 		{

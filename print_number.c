@@ -9,7 +9,7 @@
  * Return: number of digits printed
  */
 
-int print_number(unsigned long int n, int base, int is_lowercase)
+int print_number(unsigned long int n, int base, int is_lowercase, char *prefix)
 {
 	char *digits = (is_lowercase) ? "0123456789abcdef" : "0123456789ABCDEF";
 	int printed = 0, i = 0, digit;
@@ -21,6 +21,7 @@ int print_number(unsigned long int n, int base, int is_lowercase)
 		n /= base;
 	} while (n > 0);
 
+	_puts(prefix);
 	for (i = (i - 1); i >= 0; i--)
 	{
 		printed += _putchar(buffer[i]);
