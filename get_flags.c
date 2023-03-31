@@ -22,7 +22,6 @@ FLAGS get_flags(const char *format)
 		flag_struct.length += 1;
 		format++;
 	}
-	format++;
 
 
 	while (*format > '0' &&  *format <= '9')
@@ -51,11 +50,11 @@ FLAGS get_flags(const char *format)
 /**
  * is_flag - checks if a character is a flag
  * @c: character to be checked
- * Return; (0) or (1)
+ * Return: (0) or (1)
  */
 int is_flag(char c)
 {
-	char *flags = "#+- 0";
+	char *flags = ".*+- 0";
 	
 	while (*flags)
 	{
@@ -66,3 +65,42 @@ int is_flag(char c)
 
 	return (0);
 }
+
+/**
+ * flag_exists - checks if a particluar flag exists within a flag
+ * @c: character to be checked
+ * @flags: the flags to check in
+ * Return: (0) or (1)
+ */
+int flag_exists(char c, char *flags)
+{
+	
+	while (*flags)
+	{
+		if (c == *flags)
+			return (1);
+		flags++;
+	}
+
+	return (0);
+}
+
+
+/**
+ * get_flag_pointer - gets the pointer to a flag
+ * @c: character to be checked
+ * @flags: the flags to check in
+ * Return: pointer
+ */
+const char *flag_exists(char c, const char *flags)
+{
+	
+	while (*flags)
+	{
+		if (c == *flags)
+			return (flags);
+		flags++;
+	}
+
+	return (NULL);
+}j
