@@ -16,7 +16,6 @@ int count_flag(const char *format)
  * @ap: argument list
  */
 
-
 int handle_flag(const char *format, va_list ap)
 {
 	int rval, size = 0;
@@ -25,7 +24,7 @@ int handle_flag(const char *format, va_list ap)
 		rval = right_justify(ap, *format, size);
 	else if (*format == '*')
 	{
-		size = v_arg(ap, int);
+		size = va_arg(ap, int);
 		rval = right_justify(ap, *format, size);
 	}
 	else
@@ -62,9 +61,7 @@ int handle_flag(const char *format, va_list ap)
  * @num: number
  */
 
-
-
-int  handle_plus(int num)
+int handle_plus(int num)
 {
 	int rval;
 
@@ -80,28 +77,20 @@ int  handle_plus(int num)
 }
 
 
-
-
-
-
 /**
  * handle_space - handle space flag
  * @num: number
  */
-
-
 
 int handle_space(int num)
 {
 	int rval = 0;
 
 	if (num >= 0)
-		rval += putchar(' ');
+		rval += _putchar(' ');
 	else
 		rval += _putchar('-');
-		
-	
-	
+
 	rval += count_digit(num, 10);
 	print_digit(num);
 
@@ -115,12 +104,11 @@ int handle_space(int num)
  * @format: pointer to flag format
  */
 
-
-
-int  handle_zero(va_list ap, const char *format)
+int handle_zero(va_list ap, const char *format)
 {
 	int  flag_num, num, len, i = 0, j = 0, rval = 0;
-	va_list ap_c = ap;
+	va_list ap_c;
+	va_copy(ap_c, ap);
 
 	if (*format == '*')
 	{
@@ -128,13 +116,13 @@ int  handle_zero(va_list ap, const char *format)
 		flag_num = va_arg(ap, int);
 		num = va_arg(ap, int);
 		ap_c = ap;
-		len = count_digit(num);
+		len = count_digit(num, 10);
 	}
 	else
 	{
 		flag_num = get_flag_num(format);
 		num = va_arg(ap, int);
-		len = count_digit(num);
+		len = count_digit(num, 10);
 	}
 
 	if (num < 0)
@@ -144,7 +132,7 @@ int  handle_zero(va_list ap, const char *format)
 	}
 	if (len > flag_num)
 	{
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
+		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 	}
 	else
 	{
@@ -157,7 +145,7 @@ int  handle_zero(va_list ap, const char *format)
 			i++;
 		}
 		
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
+		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 	}
 	return (rval);
 }
@@ -168,12 +156,11 @@ int  handle_zero(va_list ap, const char *format)
  * @format: pointer to flag format
  */
 
-
-
-void handle_minus(int num, const char *format)
+int handle_minus(int num, const char *format)
 {	
 	int  flag_num, num, len, i = 0, j = 0, rval = 0;
-	va_list ap_c = ap;
+	va_list ap_c;
+	va_copy(ap_c, ap);
 
 	if (*format == '*')
 	{
@@ -181,13 +168,13 @@ void handle_minus(int num, const char *format)
 		flag_num = va_arg(ap, int);
 		num = va_arg(ap, int);
 		ap_c = ap;
-		len = count_digit(num);
+		len = count_digit(num, 10);
 	}
 	else
 	{
 		flag_num = get_flag_num(format);
 		num = va_arg(ap, int);
-		len = count_digit(num);
+		len = count_digit(num, 10);
 	}
 
 	if (num < 0)
@@ -197,16 +184,13 @@ void handle_minus(int num, const char *format)
 	}
 	if (len > flag_num)
 	{
-
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c);
 	}
 	else
 	{
 		rval = flag_num;
 		j = flag_num - len;
-
-		
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c);
 
 		while (i < j)
 		{
@@ -214,6 +198,7 @@ void handle_minus(int num, const char *format)
 			i++;
 		}
 	}
+
 	return (rval);
 }
 
@@ -225,8 +210,10 @@ void handle_minus(int num, const char *format)
 
 int handle_precision(va_list ap, const char* format)
 {
-	int flag_num, num, len, rval = 0, i = 0;
-	va_list ap_c = ap;
+	int flag_num, num, len, rval = 0, i = 0, j= 0;
+	va_list ap_c;
+	va_copy(ap_c, ap);
+
 	if (*format == '*')
 	{
 		flag_num = va_arg(ap, int);
@@ -262,16 +249,14 @@ int handle_precision(va_list ap, const char* format)
 			i++;
 		}
 		
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
+		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 		rval = flag_num;
 	}
 	else
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
+		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
+
 	return (rval);
 }
-
-
-
 
 /**
  * right_justify - justify stuff right
@@ -292,8 +277,7 @@ int right_justify(va_list ap, char c, int size)
 	else
 		rval += justify_number(ap, c, size);
 
-	
-
+	return (rval);
 }
 
 int justify_string(char *str, int size)
@@ -320,8 +304,11 @@ int justify_string(char *str, int size)
 
 int justify_number(va_list ap, char c, int size)
 {
+	va_list ap_c;
+	int num = va_arg(ap, int);
 	int rval = 0, len = count_digit(num, 10), i = 0, j;
 
+	va_copy(ap_c, ap);
 	j = size - len;
 	if (j > 0)
 	{
@@ -331,16 +318,16 @@ int justify_number(va_list ap, char c, int size)
 			i++;
 		}
 		
-		rval += get_printf_2('~', '~', c, ap_c)
+		rval += get_printf_2('~', '~', c, ap_c);
 		rval = size;
 	}
 	else
-		rval += get_printf_2('~', '~', c, ap_c)
+		rval += get_printf_2('~', '~', c, ap_c);
 
 	return (rval);
 }
 
-char get_specifier(cont char *format)
+char get_specifier(const char *format)
 {
 	int i = 0;
 
@@ -356,7 +343,6 @@ char get_specifier(cont char *format)
  * @format: flag format
  * Retrun: number in flag
  */
-
 
 int get_flag_num(const char *format)
 {

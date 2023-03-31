@@ -18,7 +18,8 @@ typedef struct FLAGS
 
 int _putchar(char c);
 int _puts(char *str);
-int _printf(const char *frmat, ...);
+int _puts_limit(char *str, int limit);
+int _printf(const char *format, ...);
 int get_printf(char hash, char size, char c, va_list args);
 int get_printf_2(char hash, char size, char c, va_list args);
 void print_digit(long int num);
@@ -36,11 +37,12 @@ int handle_flag(const char *format, va_list ap);
 int  handle_plus(int num);
 int handle_space(int num);
 int  handle_zero(va_list ap, const char *format);
-void handle_minus(int num, const char *format);
+int handle_minus(int num, const char *format);
 int handle_precision(va_list ap, const char* format);
 int right_justify(va_list ap, char c, int size);
 int justify_string(char *str, int size);
 int justify_number(va_list ap, char c, int size);
-char get_specifier(cont char *format);
+char get_specifier(const char *format);
 int get_flag_num(const char *format);
+int count_flag(const char *format);
 #endif
