@@ -37,7 +37,7 @@ int handle_flag(const char *format, va_list ap);
 int  handle_plus(int num);
 int handle_space(int num);
 int  handle_zero(va_list ap, const char *format);
-int handle_minus(int num, const char *format);
+int handle_minus(va_list ap, const char *format);
 int handle_precision(va_list ap, const char* format);
 int right_justify(va_list ap, char c, int size);
 int justify_string(char *str, int size);

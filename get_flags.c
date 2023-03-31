@@ -1,52 +1,5 @@
 #include "main.h"
 
-
-/**
- * get_flags - define the properties of the flag if they exist
- * @format: string to get flags from
- * Return: FLAGS structure
- */
-
-
-FLAGS get_flags(const char *format)
-{
-	FLAGS flag_struct = {0, 0, 0, 0, ""};
-	char *flags = flag_struct.flags;
-	char num[10] = "0";
-	int i  =  0;
-
-	while (is_flag(*format))
-	{
-
-		flag_struct.flags[flag_struct.length] = *format; 
-		flag_struct.length += 1;
-		format++;
-	}
-
-
-	while (*format > '0' &&  *format <= '9')
-	{
-		flag_struct.length += 1;
-		num[i++] = *format;
-		format++;
-	}
-
-	flag_struct.precision = atoi(num);
-	while (*flags)
-	{
-		if (*flags == '+' || *flags == ' ')
-			flag_struct.sign += 1;
-		if (*flags == '0' || *flags == '-')
-			flag_struct.justify += 1;
-
-		flags++;
-	}
-
-	return (flag_struct);
-}
-
-
-
 /**
  * is_flag - checks if a character is a flag
  * @c: character to be checked
@@ -65,42 +18,3 @@ int is_flag(char c)
 
 	return (0);
 }
-
-/**
- * flag_exists - checks if a particluar flag exists within a flag
- * @c: character to be checked
- * @flags: the flags to check in
- * Return: (0) or (1)
- */
-int flag_exists(char c, char *flags)
-{
-	
-	while (*flags)
-	{
-		if (c == *flags)
-			return (1);
-		flags++;
-	}
-
-	return (0);
-}
-
-
-/**
- * get_flag_pointer - gets the pointer to a flag
- * @c: character to be checked
- * @flags: the flags to check in
- * Return: pointer
- */
-const char *flag_exists(char c, const char *flags)
-{
-	
-	while (*flags)
-	{
-		if (c == *flags)
-			return (flags);
-		flags++;
-	}
-
-	return (NULL);
-}j

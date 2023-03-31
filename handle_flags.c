@@ -3,7 +3,7 @@
 int count_flag(const char *format)
 {
 	int i = 1;
-
+	
 	while(is_flag(*format))
 		i++;
 
@@ -29,7 +29,7 @@ int handle_flag(const char *format, va_list ap)
 	}
 	else
 	{
-		switch (format)
+		switch (*format)
 		{
 			case '+':
 				rval = handle_plus(va_arg(ap, int));
@@ -45,6 +45,7 @@ int handle_flag(const char *format, va_list ap)
 				break;
 			case '0':
 				rval = handle_zero(ap, ++format);
+				break;
 			default:
 				rval = _putchar('%');
 				rval += _putchar(*format);
@@ -67,9 +68,7 @@ int handle_plus(int num)
 
 	if (num >= 0)
 		rval = _putchar('+');
-	else
-		rval = _putchar('-');
-		
+	
 	rval += count_digit(num, 10);
 	print_digit(num);
 
@@ -88,8 +87,6 @@ int handle_space(int num)
 
 	if (num >= 0)
 		rval += _putchar(' ');
-	else
-		rval += _putchar('-');
 
 	rval += count_digit(num, 10);
 	print_digit(num);
@@ -115,7 +112,7 @@ int handle_zero(va_list ap, const char *format)
 		format++;
 		flag_num = va_arg(ap, int);
 		num = va_arg(ap, int);
-		ap_c = ap;
+		va_copy(ap_c, ap);
 		len = count_digit(num, 10);
 	}
 	else
@@ -126,14 +123,9 @@ int handle_zero(va_list ap, const char *format)
 	}
 
 	if (num < 0)
-	{
-		rval += _putchar('-');
 		i++;
-	}
 	if (len > flag_num)
-	{
 		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
-	}
 	else
 	{
 		rval = flag_num;
@@ -144,7 +136,7 @@ int handle_zero(va_list ap, const char *format)
 			_putchar('0');
 			i++;
 		}
-		
+
 		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 	}
 	return (rval);
@@ -156,10 +148,11 @@ int handle_zero(va_list ap, const char *format)
  * @format: pointer to flag format
  */
 
-int handle_minus(int num, const char *format)
+int handle_minus(va_list ap, const char *format)
 {	
-	int  flag_num, num, len, i = 0, j = 0, rval = 0;
+	int flag_num, num, len, i = 0, j = 0, rval = 0;
 	va_list ap_c;
+
 	va_copy(ap_c, ap);
 
 	if (*format == '*')
@@ -167,7 +160,7 @@ int handle_minus(int num, const char *format)
 		format++;
 		flag_num = va_arg(ap, int);
 		num = va_arg(ap, int);
-		ap_c = ap;
+		va_copy(ap_c, ap);
 		len = count_digit(num, 10);
 	}
 	else
@@ -178,19 +171,14 @@ int handle_minus(int num, const char *format)
 	}
 
 	if (num < 0)
-	{
-		rval += _putchar('-');
 		i++;
-	}
 	if (len > flag_num)
-	{
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c);
-	}
+		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 	else
 	{
 		rval = flag_num;
 		j = flag_num - len;
-		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c);
+		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 
 		while (i < j)
 		{
@@ -219,7 +207,7 @@ int handle_precision(va_list ap, const char* format)
 		flag_num = va_arg(ap, int);
 		format++;
 	}
-	
+
 	else
 		flag_num = get_flag_num(format);
 
@@ -235,11 +223,7 @@ int handle_precision(va_list ap, const char* format)
 	len = count_digit(num, 10);
 
 	if (num < 0)
-	{
-		rval += _putchar('-');
 		i++;
-	}
-
 	if (flag_num > len)
 	{
 		j = flag_num - len;
@@ -248,7 +232,7 @@ int handle_precision(va_list ap, const char* format)
 			_putchar('0');
 			i++;
 		}
-		
+
 		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 		rval = flag_num;
 	}
@@ -317,7 +301,7 @@ int justify_number(va_list ap, char c, int size)
 			_putchar(' ');
 			i++;
 		}
-		
+
 		rval += get_printf_2('~', '~', c, ap_c);
 		rval = size;
 	}
