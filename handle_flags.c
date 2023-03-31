@@ -114,12 +114,14 @@ int handle_space(int num)
 int  handle_zero(va_list ap, const char *format)
 {
 	int  flag_num, num, len, i = 0, j = 0, rval = 0;
+	va_list ap_c = ap;
 
 	if (*format == '*')
 	{
 		format++;
 		flag_num = va_arg(ap, int);
 		num = va_arg(ap, int);
+		ap_c = ap;
 		len = count_digit(num);
 	}
 	else
@@ -136,7 +138,7 @@ int  handle_zero(va_list ap, const char *format)
 	}
 	if (len > flag_num)
 	{
-		/* rval += print numbers */
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
 	}
 	else
 	{
@@ -148,7 +150,8 @@ int  handle_zero(va_list ap, const char *format)
 			_putchar('0');
 			i++;
 		}
-		/* print_number */ 
+		
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
 	}
 	return (rval);
 }
@@ -164,12 +167,14 @@ int  handle_zero(va_list ap, const char *format)
 void handle_minus(int num, const char *format)
 {	
 	int  flag_num, num, len, i = 0, j = 0, rval = 0;
+	va_list ap_c = ap;
 
 	if (*format == '*')
 	{
 		format++;
 		flag_num = va_arg(ap, int);
 		num = va_arg(ap, int);
+		ap_c = ap;
 		len = count_digit(num);
 	}
 	else
@@ -186,14 +191,16 @@ void handle_minus(int num, const char *format)
 	}
 	if (len > flag_num)
 	{
-		/* rval += print numbers */
+
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
 	}
 	else
 	{
 		rval = flag_num;
 		j = flag_num - len;
 
-		/* print_number */ 
+		
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
 
 		while (i < j)
 		{
@@ -213,11 +220,13 @@ void handle_minus(int num, const char *format)
 int handle_precision(va_list ap, const char* format)
 {
 	int flag_num, num, len, rval = 0, i = 0;
+	va_list ap_c = ap;
 	if (*format == '*')
 	{
 		flag_num = va_arg(ap, int);
 		format++;
 	}
+	
 	else
 		flag_num = get_flag_num(format);
 
@@ -246,11 +255,12 @@ int handle_precision(va_list ap, const char* format)
 			_putchar('0');
 			i++;
 		}
-		/* print number */
+		
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
 		rval = flag_num;
 	}
 	else
-		/* rval += print number */
+		rval += get_printf_2('~', '~', get_sprcifier(format), ap_c)
 	return (rval);
 }
 
@@ -274,7 +284,7 @@ int right_justify(va_list ap, char c, int size)
 	if (is_string)
 		rval += justify_string(va_arg(ap, char *), size);
 	else
-		rval += justify_number(va_arg(ap, int), size);
+		rval += justify_number(ap, c, size);
 
 	
 
@@ -302,7 +312,7 @@ int justify_string(char *str, int size)
 }
 
 
-int justify_number(int num, int size)
+int justify_number(va_list ap, char c, int size)
 {
 	int rval = 0, len = count_digit(num, 10), i = 0, j;
 
@@ -314,14 +324,27 @@ int justify_number(int num, int size)
 			_putchar(' ');
 			i++;
 		}
-		/* print number */
+		
+		rval += get_printf_2('~', '~', c, ap_c)
 		rval = size;
 	}
 	else
-		/* rval += _print number); */
+		rval += get_printf_2('~', '~', c, ap_c)
 
 	return (rval);
 }
+
+char get_specifier(cont char *format)
+{
+	int i = 0;
+
+	while (is_flag(*format))
+		i++;
+
+	return (*format);
+}
+
+
 /**
  * get_flag_num - get the number in the flag
  * @format: flag format
