@@ -32,6 +32,15 @@ int print_number(unsigned long int n, int base, int is_lowercase, char *prefix);
 int print_address(unsigned long int p);
 int is_flag(char c);
 FLAGS get_flags(const char *format);
-int handle_flags(FLAGS flag_struct, const char *format);
-
+int handle_flag(const char *format, va_list ap);
+int  handle_plus(int num);
+int handle_space(int num);
+int  handle_zero(va_list ap, const char *format);
+void handle_minus(int num, const char *format);
+int handle_precision(va_list ap, const char* format);
+int right_justify(va_list ap, char c, int size);
+int justify_string(char *str, int size);
+int justify_number(va_list ap, char c, int size);
+char get_specifier(cont char *format);
+int get_flag_num(const char *format);
 #endif

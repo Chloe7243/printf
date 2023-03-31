@@ -54,7 +54,7 @@ FLAGS get_flags(const char *format)
  */
 int is_flag(char c)
 {
-	char *flags = ".*+- 0";
+	char *flags = ".*+- 0123456789";
 	
 	while (*flags)
 	{

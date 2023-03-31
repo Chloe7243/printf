@@ -1,5 +1,14 @@
 #include "main.h"
 
+int count_flag(const char *format)
+{
+	int i = 1;
+
+	while(is_flag(*format))
+		i++;
+
+	return (i);
+}
 
 /**
  * handle_flag - handle flags if any
@@ -31,9 +40,6 @@ int handle_flag(const char *format, va_list ap)
 				break;
 			case ' ':
 				rval = handle_space(va_arg(ap, int));
-				break;
-			case '#':
-				rval = handle_hash(va_arg(ap, int));
 				break;
 			case '.':
 				rval = handle_precision(ap, ++format);
