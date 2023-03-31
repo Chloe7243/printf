@@ -27,17 +27,19 @@ int handle_flag(const char *format, va_list ap)
 				rval = handle_plus(va_arg(ap, int));
 				break;
 			case '-':
-				rval = handle_minus(ap, format);
+				rval = handle_minus(ap, ++format);
 				break;
 			case ' ':
-				rval = handle_space(va_arg(ap, int), format);
+				rval = handle_space(ap, ++format);
 				break;
 			case '#':
 				rval = handle_hash(va_arg(ap, int));
 				break;
 			case '.':
-				rval = handle_precision(ap, format);
+				rval = handle_precision(ap, ++format);
 				break;
+			case '0':
+				rval = handle_zero(ap, ++format);
 			default:
 				rval = _putchar('%');
 				rval += _putchar(*format);
@@ -89,11 +91,13 @@ int handle_space(int num)
 	int rval = 0;
 
 	if (num >= 0)
-		_putchar(' ');
+		rval += putchar(' ');
 	else
-		_putchar('-');
+		rval += _putchar('-');
 		
 	/* print numbers */
+
+	return (rval);
 }
 
 
@@ -105,10 +109,12 @@ int handle_space(int num)
 
 
 
-void handle_zero(int num, const char *format)
+void handle_zero(va_list ap, const char *format)
 {
-	int  flag_num = get_flag_num(format), len = count_digit(num);
+	int  flag_num, len;
 	int i = 0, j = 0;
+
+	if (*format == '*')
 
 	if (num < 0)
 	{
