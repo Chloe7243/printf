@@ -26,3 +26,19 @@ int _puts(char *str)
 		_putchar(str[i]);
 	return (i);
 }
+
+
+/**
+ * _puts_limit - prints a string to stdout with a limit
+ * @str: pointer to the string to print
+ * @limit: limit of string
+ * Return: number of chars written
+ */
+int _puts(char *str, int limit)
+{
+	register int i;
+
+	for (i = 0; i < limit; i++)
+		_putchar(str[i]);
+	return (i);
+}

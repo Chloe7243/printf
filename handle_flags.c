@@ -13,11 +13,11 @@ int handle_flag(const char *format, va_list ap)
 	int rval, size = 0;
 
 	if (*format > '0' && *format <= '9')
-		rval = right_justify(va_arg(ap, int), format, size);
+		rval = right_justify(va_arg(ap, int), *format, size);
 	else if (*format == '*')
 	{
 		size = v_arg(ap, int);
-		rval = right_justify(va_arg(ap, int), format, size);
+		rval = right_justify(va_arg(ap, int), *format, size);
 	}
 	else
 	{
@@ -30,7 +30,7 @@ int handle_flag(const char *format, va_list ap)
 				rval = handle_minus(ap, ++format);
 				break;
 			case ' ':
-				rval = handle_space(ap, ++format);
+				rval = handle_space(va_arg(ap, int));
 				break;
 			case '#':
 				rval = handle_hash(va_arg(ap, int));
@@ -44,8 +44,6 @@ int handle_flag(const char *format, va_list ap)
 				rval = _putchar('%');
 				rval += _putchar(*format);
 				break;
-
-
 		}
 	}
 
@@ -111,8 +109,7 @@ int handle_space(int num)
 
 int  handle_zero(va_list ap, const char *format)
 {
-	int  flag_num, num, len;
-	int i = 0, j = 0, rval = 0;
+	int  flag_num, num, len, i = 0, j = 0, rval = 0;
 
 	if (*format == '*')
 	{
@@ -136,7 +133,6 @@ int  handle_zero(va_list ap, const char *format)
 
 	if (len > flag_num)
 	{
-
 		/* rval += print numbers */
 	}
 	else
@@ -149,14 +145,12 @@ int  handle_zero(va_list ap, const char *format)
 			_putchar('0');
 			i++;
 		}
-
 		/* print_number */ 
 	}
-
 }
 
 /**
- * handle_minus - handle minus flag
+ * handle_minus - handle minus flag (left justify)
  * @num: number
  * @format: pointer to flag format
  */
@@ -164,35 +158,62 @@ int  handle_zero(va_list ap, const char *format)
 
 
 void handle_minus(int num, const char *format)
-{
-	int  flag_num = get_flag_num(format), len = count_digit(num);
-	int i = 0, j = 0;
+{	
+	int  flag_num, num, len, i = 0, j = 0, rval = 0;
+
+	if (*format == '*')
+	{
+		format++;
+		flag_num = va_arg(ap, int);
+		num = va_arg(ap, int);
+		len = count_digit(num);
+	}
+	else
+	{
+		flag_num = get_flag_num(format);
+		num = va_arg(ap, int);
+		len = count_digit(num);
+	}
 
 	if (num < 0)
 	{
-		_putchar('-');
+		rval += _putchar('-');
 		i++;
 	}
 
 	if (len > flag_num)
-		/* print numbers */
+	{
+		/* rval += print numbers */
+	}
 	else
 	{
-		/* print_number */
-
+		rval = flag_num;
 		j = flag_num - len;
+
+		/* print_number */ 
 
 		while (i < j)
 		{
 			_putchar(' ');
 			i++;
 		}
-
 	}
-
 }
 
+/**
+ * handle_precision - handle precision flag
+ * @ap: argument list
+ * @format: format of flag
+ */
 
+
+
+/**
+ * right_justify - justify stuff right
+ * @num: number
+ * @c: non-conversion format specifier
+ * @size: size
+ */
 
 
 /**
