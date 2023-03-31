@@ -109,23 +109,39 @@ int handle_space(int num)
 
 
 
-void handle_zero(va_list ap, const char *format)
+int  handle_zero(va_list ap, const char *format)
 {
-	int  flag_num, len;
-	int i = 0, j = 0;
+	int  flag_num, num, len;
+	int i = 0, j = 0, rval = 0;
 
 	if (*format == '*')
+	{
+		format++;
+		flag_num = va_arg(ap, int);
+		num = va_arg(ap, int);
+		len = count_digit(num);
+	}
+	else
+	{
+		flag_num = get_flag_num(format);
+		num = va_arg(ap, int);
+		len = count_digit(num);
+	}
 
 	if (num < 0)
 	{
-		_putchar('-');
+		rval += _putchar('-');
 		i++;
 	}
 
 	if (len > flag_num)
-		/* print numbers */
+	{
+
+		/* rval += print numbers */
+	}
 	else
 	{
+		rval = flag_num;
 		j = flag_num - len;
 
 		while (i < j)
