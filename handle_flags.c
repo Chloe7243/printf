@@ -2,20 +2,74 @@
 
 
 /**
+ * handle_flag - handle flags if any
+ * @format: format
+ * @ap: argument list
+ */
+
+
+int handle_flag(const char *format, va_list ap)
+{
+	int rval, size = 0;
+
+	if (*format > '0' && *format <= '9')
+		rval = right_justify(va_arg(ap, int), format, size);
+	else if (*format == '*')
+	{
+		size = v_arg(ap, int);
+		rval = right_justify(va_arg(ap, int), format, size);
+	}
+	else
+	{
+		switch (format)
+		{
+			case '+':
+				rval = handle_plus(va_arg(ap, int));
+				break;
+			case '-':
+				rval = handle_minus(ap, format);
+				break;
+			case ' ':
+				rval = handle_space(va_arg(ap, int), format);
+				break;
+			case '#':
+				rval = handle_hash(va_arg(ap, int));
+				break;
+			case '.':
+				rval = handle_precision(ap, format);
+				break;
+			default:
+				rval = _putchar('%');
+				rval += _putchar(*format);
+				break;
+
+
+		}
+	}
+
+	return (rval);
+
+}
+
+/**
  * handle_plus - handle plus flag
  * @num: number
  */
 
 
 
-void handle_plus(int num)
+int  handle_plus(int num)
 {
+	int rval;
+
 	if (num >= 0)
-		_putchar('+');
+		rval = _putchar('+');
 	else
-		_putchar('-');
+		rval = _putchar('-');
 		
 	/* print numbers */
+
+	return (rval);
 }
 
 
@@ -30,8 +84,10 @@ void handle_plus(int num)
 
 
 
-void handle_space(int num)
+int handle_space(int num)
 {
+	int rval = 0;
+
 	if (num >= 0)
 		_putchar(' ');
 	else
@@ -113,6 +169,7 @@ void handle_minus(int num, const char *format)
 	}
 
 }
+
 
 
 
