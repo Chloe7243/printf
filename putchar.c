@@ -34,7 +34,7 @@ int _puts(char *str)
  * @limit: limit of string
  * Return: number of chars written
  */
-int _puts(char *str, int limit)
+int _puts_limit(char *str, int limit)
 {
 	register int i;
 

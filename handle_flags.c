@@ -13,11 +13,11 @@ int handle_flag(const char *format, va_list ap)
 	int rval, size = 0;
 
 	if (*format > '0' && *format <= '9')
-		rval = right_justify(va_arg(ap, int), *format, size);
+		rval = right_justify(ap, *format, size);
 	else if (*format == '*')
 	{
 		size = v_arg(ap, int);
-		rval = right_justify(va_arg(ap, int), *format, size);
+		rval = right_justify(ap, *format, size);
 	}
 	else
 	{
@@ -67,7 +67,8 @@ int  handle_plus(int num)
 	else
 		rval = _putchar('-');
 		
-	/* print numbers */
+	rval += count_digit(num, 10);
+	print_digit(num);
 
 	return (rval);
 }
@@ -93,7 +94,10 @@ int handle_space(int num)
 	else
 		rval += _putchar('-');
 		
-	/* print numbers */
+	
+	
+	rval += count_digit(num, 10);
+	print_digit(num);
 
 	return (rval);
 }
@@ -130,7 +134,6 @@ int  handle_zero(va_list ap, const char *format)
 		rval += _putchar('-');
 		i++;
 	}
-
 	if (len > flag_num)
 	{
 		/* rval += print numbers */
@@ -147,6 +150,7 @@ int  handle_zero(va_list ap, const char *format)
 		}
 		/* print_number */ 
 	}
+	return (rval);
 }
 
 /**
@@ -180,7 +184,6 @@ void handle_minus(int num, const char *format)
 		rval += _putchar('-');
 		i++;
 	}
-
 	if (len > flag_num)
 	{
 		/* rval += print numbers */
@@ -198,6 +201,7 @@ void handle_minus(int num, const char *format)
 			i++;
 		}
 	}
+	return (rval);
 }
 
 /**
@@ -206,16 +210,118 @@ void handle_minus(int num, const char *format)
  * @format: format of flag
  */
 
+int handle_precision(va_list ap, const char* format)
+{
+	int flag_num, num, len, rval = 0, i = 0;
+	if (*format == '*')
+	{
+		flag_num = va_arg(ap, int);
+		format++;
+	}
+	else
+		flag_num = get_flag_num(format);
+
+	format += count_digit(flag_num, 10);
+
+	if (*format == 's' || *format == 'c')
+	{
+		rval += _puts_limit(va_arg(ap, char *), flag_num);
+		return (rval);
+	}
+
+	num = va_arg(ap, int);
+	len = count_digit(num, 10);
+
+	if (num < 0)
+	{
+		rval += _putchar('-');
+		i++;
+	}
+
+	if (flag_num > len)
+	{
+		j = flag_num - len;
+		while (i < j)
+		{
+			_putchar('0');
+			i++;
+		}
+		/* print number */
+		rval = flag_num;
+	}
+	else
+		/* rval += print number */
+	return (rval);
+}
+
+
 
 
 /**
  * right_justify - justify stuff right
- * @num: number
+ * @ap: argument list
  * @c: non-conversion format specifier
  * @size: size
  */
 
+int right_justify(va_list ap, char c, int size)
+{
+	int is_string = 0, rval = 0;
 
+	if (c == 's' || c == 'c')
+		is_string++;
+
+	if (is_string)
+		rval += justify_string(va_arg(ap, char *), size);
+	else
+		rval += justify_number(va_arg(ap, int), size);
+
+	
+
+}
+
+int justify_string(char *str, int size)
+{
+	int rval = 0, len = strlen(str), i = 0, j;
+
+	j = size - len;
+	if (j > 0)
+	{
+		while (i < j)
+		{
+			_putchar(' ');
+			i++;
+		}
+		_puts(str);
+		rval = size;
+	}
+	else
+		rval += _puts(str);
+
+	return (rval);
+}
+
+
+int justify_number(int num, int size)
+{
+	int rval = 0, len = count_digit(num, 10), i = 0, j;
+
+	j = size - len;
+	if (j > 0)
+	{
+		while (i < j)
+		{
+			_putchar(' ');
+			i++;
+		}
+		/* print number */
+		rval = size;
+	}
+	else
+		/* rval += _print number); */
+
+	return (rval);
+}
 /**
  * get_flag_num - get the number in the flag
  * @format: flag format
