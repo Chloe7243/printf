@@ -2,10 +2,13 @@
 
 int count_flag(const char *format)
 {
-	int i = 1;
-	
+	int i = 0;
+
 	while(is_flag(*format))
+	{
 		i++;
+		format++;
+	}
 
 	return (i);
 }
@@ -68,7 +71,7 @@ int handle_plus(int num)
 
 	if (num >= 0)
 		rval = _putchar('+');
-	
+
 	rval += count_digit(num, 10);
 	print_digit(num);
 
@@ -150,7 +153,7 @@ int handle_zero(va_list ap, const char *format)
 
 int handle_minus(va_list ap, const char *format)
 {	
-	int flag_num, num, len, i = 0, j = 0, rval = 0;
+	int flag_num, num, len, i = 0, j, rval = 0;
 	va_list ap_c;
 
 	va_copy(ap_c, ap);
@@ -170,13 +173,12 @@ int handle_minus(va_list ap, const char *format)
 		len = count_digit(num, 10);
 	}
 
-	if (num < 0)
+	if(num < 0)
 		i++;
 	if (len > flag_num)
 		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 	else
 	{
-		rval = flag_num;
 		j = flag_num - len;
 		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
 
@@ -186,7 +188,6 @@ int handle_minus(va_list ap, const char *format)
 			i++;
 		}
 	}
-
 	return (rval);
 }
 
@@ -208,8 +209,12 @@ int handle_precision(va_list ap, const char* format)
 		format++;
 	}
 
-	else
+	else if (*format > '0' && *format <= '9')
 		flag_num = get_flag_num(format);
+	else
+	{
+		return (0);
+	}
 
 	format += count_digit(flag_num, 10);
 
@@ -316,7 +321,10 @@ char get_specifier(const char *format)
 	int i = 0;
 
 	while (is_flag(*format))
+	{
 		i++;
+		format++;
+	}
 
 	return (*format);
 }
