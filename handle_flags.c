@@ -67,7 +67,7 @@ int handle_flag(const char *format, va_list ap)
 
 int handle_plus(int num)
 {
-	int rval;
+	int rval = 0;
 
 	if (num >= 0)
 		rval = _putchar('+');
