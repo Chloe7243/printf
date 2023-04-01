@@ -238,7 +238,7 @@ int handle_precision(va_list ap, const char* format)
 			i++;
 		}
 
-		rval += get_printf_2('~', '~', get_specifier(format), ap_c);
+		get_printf_2('~', '~', get_specifier(format), ap_c);
 		rval = flag_num;
 	}
 	else
@@ -307,7 +307,7 @@ int justify_number(va_list ap, char c, int size)
 			i++;
 		}
 
-		rval += get_printf_2('~', '~', c, ap_c);
+		get_printf_2('~', '~', c, ap_c);
 		rval = size;
 	}
 	else
